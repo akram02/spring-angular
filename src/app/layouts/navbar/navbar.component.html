@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row [ngSwitch]="isAuthenticated()">
+    <button mat-icon-button>
+      <mat-icon (click)="sidenavbar.toggle()">menu</mat-icon>
+    </button>
+    <a class="navbar-brand logo" routerLink="/">
+      <span class="logo-img"></span>
+    </a>
+    <span class="menu-spacer"></span>
+    <span style="flex: 1 auto;"></span>
+    <div style="align-content: center">
+      <a mat-button routerLink="account/register" *ngSwitchCase="false">
+        <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+        <span>Registration</span>
+      </a>
+      <a mat-button (click)="login()" id="login" *ngSwitchCase="false">
+        <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
+        <span>Login</span>
+      </a>
+      <a mat-button routerLink="account/settings" routerLinkActive="active" *ngSwitchCase="true">
+        <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+        <span>Edit Profile</span>
+      </a>
+      <a mat-button routerLink="account/password" routerLinkActive="active" *ngSwitchCase="true">
+        <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+        <span>Change Password</span>
+      </a>
+      <a mat-button (click)="logout()" id="logout" *ngSwitchCase="true">
+        <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
+        <span>Log out</span>
+      </a>
+      <span href="javascript:void(0);" *ngIf="isAuthenticated()">
+        <span *ngIf="!getImageUrl()">
+          <fa-icon icon="user"></fa-icon>
+          <span> {{getName()}}</span>
+        </span>
+        <span *ngIf="getImageUrl()">
+          <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
+           <span> {{getName()}}</span>
+        </span>
+      </span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
